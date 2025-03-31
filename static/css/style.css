@@ -1,0 +1,355 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e6e6fa;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+/* Toolbar */
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #6a5acd;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.toolbar button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #6a5acd;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.toolbar button:hover {
+    background: #8a2be2;
+    color: white;
+}
+
+/* Contenedor principal */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 80px auto 20px;
+    position: relative;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+thead {
+    background: linear-gradient(90deg, #6a5acd, #8a2be2);
+    color: white;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    text-transform: uppercase;
+}
+
+tbody {
+    display: table-row-group;
+}
+
+tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+tbody tr:hover {
+    background: #f5f5f5;
+}
+
+/* Botones de acción */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Botones principales */
+#addRowBtn, #deleteRowBtn, #executeBtn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#addRowBtn {
+    background: #8a2be2;
+    color: white;
+}
+#addRowBtn:hover {
+    background: #6a5acd;
+}
+
+#deleteRowBtn {
+    background: #ff4d4d;
+    color: white;
+}
+#deleteRowBtn:hover {
+    background: #ff1a1a;
+}
+
+#executeBtn {
+    background: #28a745;
+    color: white;
+}
+#executeBtn:hover {
+    background: #218838;
+}
+
+/* Inputs de tabla */
+td input {
+    width: 80px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Alineación derecha */
+th:nth-child(n+2), td:nth-child(n+2) {
+    text-align: right;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .toolbar {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .toolbar button {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .container {
+        width: 95%;
+        margin-top: 90px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    td input {
+        width: 60px;
+    }
+}
+
+/* Timeline */
+#timeline {
+    position: relative;
+    height: 60px;
+    margin-top: 20px;
+    border: 2px dashed #ccc;
+    background-color: #f9f9f9;
+    overflow-x: auto;
+}
+
+/* Bloques de ejecución en timeline */
+.timeline-block {
+    position: absolute;
+    height: 40px;
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #2980b9;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Estilo general para todos los botones */
+button {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.add-row {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button.delete-row {
+    background-color: #f44336;
+    color: white;
+}
+
+button.execute {
+    background-color: #008CBA;
+    color: white;
+}
+
+button:hover {
+    background-color: #005f73;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+button.active {
+    background-color: #ffa500;
+    color: white;
+    font-weight: bold;
+}
+
+/* ---------------------- */
+/* ESTILOS PARA EL MODAL */
+/* ---------------------- */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    overflow: auto;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#closeModal {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: 35px;
+}
+
+#batchArrivalInput,
+.modal-content input[type="text"],
+.modal-content input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+#modalProcessTable {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+#modalProcessTable thead {
+    background-color: #6a5acd;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+#modalProcessTable th {
+    background-color: #6a5acd;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 40px;
+}
+
+#modalProcessTable tbody td {
+    background-color: #ffffff;
+    color: #333;
+    height: 50px;
+}
+
+.modal-content .add-row,
+.modal-content .execute {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 12px;
+    border-radius: 10px;
+}
+#timeline {
+    position: relative;
+    height: 140px; /* Aumentado para evitar scroll vertical */
+    border: 1px dashed #ccc;
+    margin-top: 30px;
+    overflow-x: auto;
+    overflow-y: hidden; /* Evita scroll vertical */
+    background-color: #f9f9f9;
+    padding-top: 50px; /* Espacio para las etiquetas */
+    min-width: 100%;
+}

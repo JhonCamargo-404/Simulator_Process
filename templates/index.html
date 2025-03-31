@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Procesos</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <button id="serieBtn">Procesamiento en Serie</button>
+        <button id="lotesBtn">Procesamiento por Lotes</button>
+        <button id="tiempoCompartidoBtn">Tiempo Compartido</button>
+    </div>
+
+    <!-- Campo Quantum visible para ambos modos -->
+    <div id="quantumContainer" style="display: none; margin: 80px auto 10px; width: fit-content;">
+        <label for="quantumInput">Quantum:</label>
+        <input type="number" id="quantumInput" placeholder="Ingrese el quantum" min="1" style="width: 100px;">
+    </div>
+
+    <!-- Contenedor Modo Serie y Round Robin -->
+    <div class="container" id="mainContainer">
+        <div class="table-container">
+            <table id="processTable">
+                <thead>
+                    <tr>
+                        <th>Process</th>
+                        <th>AT</th> 
+                        <th>BT</th> 
+                        <th>CT</th>
+                        <th>TAT (CT - AT)</th>
+                        <th>NTAT (TAT / BT)</th>
+                        <th>WT (TAT - BT)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Botones -->
+        <div class="action-buttons">
+            <button id="addRowBtn" class="add-row">Añadir una fila debajo</button>
+            <button id="deleteRowBtn" class="delete-row">Eliminar la última fila</button>
+            <button id="executeSerieBtn" class="execute" style="display: none;">Ejecutar Serie</button>
+            <button id="executeRoundRobinBtn" class="execute" style="display: none;">Ejecutar Round Robin</button>
+        </div>
+    </div>
+
+    <!-- Contenedor Modo por Lotes -->
+    <div class="container" id="batchContainer" style="display: none;">
+        <div class="table-container">
+            <table id="batchTable">
+                <thead>
+                    <tr>
+                        <th>Lote_ID</th>
+                        <th>Process</th>
+                        <th>AT</th>
+                        <th>BT</th>
+                        <th>CT</th>
+                        <th>TAT</th>
+                        <th>NTAT</th>
+                        <th>WT</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Botones -->
+        <div class="action-buttons">
+            <button id="createBatchBtn" class="add-row">Crear Lote</button>
+            <button id="deleteBatchBtn" class="delete-row">Eliminar Último Lote</button>
+            <button id="executeBatchBtn" class="execute">Ejecutar Lotes</button>
+        </div>
+    </div>
+
+    <!-- MODAL para agregar procesos al lote -->
+    <div id="batchModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal" style="float: right; cursor: pointer;">&times;</span>
+            <h2>Crear Lote</h2>
+            <label for="batchArrivalInput">Arrival Time del Lote:</label>
+            <input type="number" id="batchArrivalInput" min="0" placeholder="AT del lote">
+            <table id="modalProcessTable">
+                <thead>
+                    <tr>
+                        <th>Proceso</th>
+                        <th>BT</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="addProcessToModalBtn" class="add-row">Agregar Proceso</button>
+            <button id="confirmBatchBtn" class="execute">Confirmar Lote</button>
+        </div>
+    </div>
+
+    <div id="timeline"></div>
+
+    <script src="../static/js/script.js"></script>
+    <script>
+        // Mostrar el campo de Quantum según el modo
+        document.getElementById("tiempoCompartidoBtn").addEventListener("click", function () {
+            document.getElementById("mainContainer").style.display = "block";
+            document.getElementById("batchContainer").style.display = "none";
+            document.getElementById("quantumContainer").style.display = "block";
+        });
+
+        document.getElementById("serieBtn").addEventListener("click", function () {
+            document.getElementById("mainContainer").style.display = "block";
+            document.getElementById("batchContainer").style.display = "none";
+            document.getElementById("quantumContainer").style.display = "none";
+        });
+
+        document.getElementById("lotesBtn").addEventListener("click", function () {
+            document.getElementById("mainContainer").style.display = "none";
+            document.getElementById("batchContainer").style.display = "block";
+            document.getElementById("quantumContainer").style.display = "block";
+        });
+    </script>
+
+</body>
+</html>
